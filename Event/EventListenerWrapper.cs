@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Verse;
 
 namespace RC.Rimgazer.Event
 {
@@ -27,15 +28,20 @@ namespace RC.Rimgazer.Event
             this.AnchorValue = AnchorField.GetValue((object)null);
         }
 
-
-        public void resolveAllEventHandlers()
+        public void resolveAllEventHandlers(Type Target)
         {
-            foreach (MethodInfo method in this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance))
+            Log.Error("NAME OF TYPE AT PLAY IS " + Target);
+            foreach (MethodInfo method in Target.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
             {
+                Log.Error("NAME OF METHOD AT PLAY IS " + method);
                 EventHandlerWrapper tmpz = EventHandlerWrapper.getEventHandlerFor(method, this);
                 if (tmpz == null)
+                {
+                    Log.Warning(EventException.popException());
                     continue;
+                }
                 this.DescendantHandlers.Add(tmpz);
+                EventBase.registerHandler(tmpz);
             }
         }
 
@@ -49,17 +55,6 @@ namespace RC.Rimgazer.Event
             EventListenerWrapper store = null;
             if (resolvedEventListeners.TryGetValue(Target,out store))
                 return store;
-            if (Target.IsSubclassOf(typeof(Event)))
-            {
-                EventException.pushException("Type " + Target +" cant be Event and Listener at same time.");
-                return null;
-            }
-            Object[] attributes = Target.GetCustomAttributes(annotation, false);
-            if (attributes == null || attributes.Length == 0)
-            {
-                EventException.pushException("Type " + Target +" does not have valid annotation.");
-                return null;
-            }
 
             CustomAttributeData annotationData = CustomAttributeData.GetCustomAttributes(Target)[0];
             if (annotationData == null)
@@ -117,6 +112,7 @@ namespace RC.Rimgazer.Event
             }
             store = new EventListenerWrapper(anchorField, initerMethod,Target);
             resolvedEventListeners.Add(Target, store);
+            store.resolveAllEventHandlers(Target);
 
             return store;
         }

@@ -12,10 +12,22 @@ namespace RT.Testgazer
     [EventListener("instance", "entry")]
     class SampleOne
     {
-        [EventHandler(EventPriorityEnum.HIGH)]
-        public void test(GameSavedEvent e)
+        [EventHandler(EventPriorityEnum.FINAL)]
+        public void testa(GameSavedEvent e)
         {
-            Log.Warning("GameSavedEvent is thrown");
+            Log.Warning("FINAL");
+        }
+
+        [EventHandler(EventPriorityEnum.DEFAULT)]
+        public void testb(GameSavedEvent e)
+        {
+            Log.Warning("DEFAULT");
+        }
+
+        [EventHandler(EventPriorityEnum.LOW)]
+        public void testc(GameSavedEvent e)
+        {
+            Log.Warning("LOW");
         }
 
         public static SampleOne instance;

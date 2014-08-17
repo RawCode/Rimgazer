@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RC.Rimgazer
 {
-    [PersistentComment("This is code comment visible in decompiled classes.")]
+    [PersistentComment("This is comment that visible in decompiled classes")]
     public class PersistentCommentAttribute : Attribute
     {
         public PersistentCommentAttribute(string PersistentCommentData)

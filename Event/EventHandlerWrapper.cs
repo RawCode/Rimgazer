@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Verse;
 
 namespace RC.Rimgazer.Event
 {
@@ -24,7 +25,7 @@ namespace RC.Rimgazer.Event
             this.TargetEvent = Event;
         }
 
-        public void handleEvent(Event e)
+        public void handleEvent(EventBase e)
         {
             if (e.GetType() != TargetEvent)
                 return;
@@ -54,7 +55,11 @@ namespace RC.Rimgazer.Event
                 return null;
             }
 
-            if (Target.GetParameters()[0].ParameterType.IsSubclassOf(typeof(Event)))
+            Log.Error("THIS");
+
+            Log.Error(Target.GetParameters()[0].ParameterType.ToString());
+
+            if (!Target.GetParameters()[0].ParameterType.IsSubclassOf(typeof(EventBase)))
             {
                 EventException.pushException("Method " + Target + " must accept subclass of Event");
                 return null;
