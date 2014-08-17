@@ -14,7 +14,7 @@ namespace RC.Rimgazer.Event
 
         static public List<EventHandlerWrapper> roamingHandlers = new List<EventHandlerWrapper>();
 
-        static void registerEventTypeOnBus(Type Target)1
+        static void registerEventTypeOnBus(Type Target)
         {
             if (resolvedEvents.ContainsKey(Target))
             {
