@@ -33,7 +33,26 @@ namespace ConsoleApplication1
         }
     }
 
-    [TEST("BLABLA","HAHA","TEST")]
+
+    public class A
+    {
+        public int Az;
+        public A()
+        {
+            this.Az = 10;
+        }
+    }
+
+    public class B
+    {
+        public int Bz;
+        public B()
+        {
+            this.Bz = 10;
+        }
+    }
+    
+   // [TEST("BLABLA","HAHA","TEST")]
     class Program
     {
 
@@ -51,89 +70,87 @@ namespace ConsoleApplication1
             Console.WriteLine("TESTE METHOD INVOCATION");
         }
 
-
-
-        static void Main(string[] args)
+        unsafe static void Main(string[] args)
         {
-            List<ZXX> test = new List<ZXX>();
-            Random rz = new Random();
+          //  List<ZXX> test = new List<ZXX>();
+          //  Random rz = new Random();
 
-            for (int i = 0; i < 20; i++)
-            {
-                test.Add(new ZXX((TZ)rz.Next(4)));
-            }
-
-            test.Add(new ZXX(TZ.FOR));
-            test.Add(new ZXX(TZ.TWO));
-            test.Add(new ZXX(TZ.THIS));
-            test.Add(new ZXX(TZ.ONE));
-
-            foreach (ZXX cc in test)
-                Console.WriteLine(cc);
-
-            int dimension = Enum.GetNames(typeof(TZ)).Length;
-            int size = test.Count;
-            int[] offsets = new int[dimension];
-
-            ZXX[] sorted = new ZXX[dimension*size];
-
-            foreach (ZXX cc in test)
-            {
-                int targetindex = ((int)(cc.priority) * size) + offsets[(int)cc.priority];
-                offsets[(int)cc.priority]++;
-                sorted[targetindex] = cc;
-            }
-            //int a = 0;
-            /*
-            foreach(ZXX cv in sorted)
-            {
-                if (cv == null)
-                    continue;
-                test[a] = cv;
-                a++;
-            }
-            */
-          //  foreach (int f in offsets)
-           // {
-                //Console.WriteLine(f);
+          //  for (int i = 0; i < 20; i++)
+          //  {
+          //      test.Add(new ZXX((TZ)rz.Next(4)));
           //  }
 
-           // int xx = 0;
-            //foreach (ZXX x in sorted)
-            //{
-                //Console.WriteLine(x +"%%" + xx);
-            //    xx++;
-            // }
+          //  test.Add(new ZXX(TZ.FOR));
+          //  test.Add(new ZXX(TZ.TWO));
+          //  test.Add(new ZXX(TZ.THIS));
+          //  test.Add(new ZXX(TZ.ONE));
 
-            //Console.ReadKey();
-            //if (true) return;
+          //  foreach (ZXX cc in test)
+          //      Console.WriteLine(cc);
+
+          //  int dimension = Enum.GetNames(typeof(TZ)).Length;
+          //  int size = test.Count;
+          //  int[] offsets = new int[dimension];
+
+          //  ZXX[] sorted = new ZXX[dimension*size];
+
+          //  foreach (ZXX cc in test)
+          //  {
+          //      int targetindex = ((int)(cc.priority) * size) + offsets[(int)cc.priority];
+          //      offsets[(int)cc.priority]++;
+          //      sorted[targetindex] = cc;
+          //  }
+          //  //int a = 0;
+          //  /*
+          //  foreach(ZXX cv in sorted)
+          //  {
+          //      if (cv == null)
+          //          continue;
+          //      test[a] = cv;
+          //      a++;
+          //  }
+          //  */
+          ////  foreach (int f in offsets)
+          // // {
+          //      //Console.WriteLine(f);
+          ////  }
+
+          // // int xx = 0;
+          //  //foreach (ZXX x in sorted)
+          //  //{
+          //      //Console.WriteLine(x +"%%" + xx);
+          //  //    xx++;
+          //  // }
+
+          //  //Console.ReadKey();
+          //  //if (true) return;
 
 
-            int index = 0;
-            int step = 0;
-            test.Clear();
+          //  int index = 0;
+          //  int step = 0;
+          //  test.Clear();
 
-            while(true)
-            {
-                if (index == offsets[step] + step * size)
-                {
-                    if (step == dimension-1)
-                        break;
-                    step++;
-                    index = step * size;
-                    continue;
-                }
-                test.Add(sorted[index]);
-                index++;
-            }
+          //  while(true)
+          //  {
+          //      if (index == offsets[step] + step * size)
+          //      {
+          //          if (step == dimension-1)
+          //              break;
+          //          step++;
+          //          index = step * size;
+          //          continue;
+          //      }
+          //      test.Add(sorted[index]);
+          //      index++;
+          //  }
 
 
-            //sxxx.
-            foreach (ZXX cc in test)
-                Console.WriteLine(cc);
-            Console.WriteLine(test.Count);
+          //  //sxxx.
+          //  foreach (ZXX cc in test)
+          //      Console.WriteLine(cc);
+          //  Console.WriteLine(test.Count);
 
-            //experemental sorting
+          //  //experemental sorting
 
 
             //Console.WriteLine("TEST");

@@ -10,25 +10,34 @@ namespace RC.Rimgazer
 {
     public class Rimgazer : MapComponent
     {
+        static bool kludge = false;
         public Rimgazer()
         {
+            if (kludge) return;
+            kludge ^= true;
+
             EventRuntime.resolveValidTypes();
             EventRuntime.resolveValidEvents();
-            try
-            {
-                EventRuntime.resolveValidListeners();
-                EventBase.sortHandlerList();
-            }
-            catch(Exception e)
-            {
-                Log.Error(e.ToString());
-            }
-            EventBase.fireEvent(new GameSavedEvent());
+            EventRuntime.resolveValidListeners();
+            EventBase.sortHandlerList();
 
+            if (MapInitData.startedFromEntry)
+                EventBase.fireEvent(new GameStartedEvent());
+            else
+                EventBase.fireEvent(new GameLoadedEvent());
+        }
 
-            foreach (Type t in EventBase.resolvedEvents.Keys)
-                Log.Warning(t.ToString());
+        public override void MapComponentTick()
+        {
+            if (Find.TickManager.tickCount == (DebugSettings.fastEcology ? 1 : 250))
+                EventBase.fireEvent(new GameFirstTickEvent());
+            EventBase.fireEvent(new GameTickEvent());
+        }
 
+        public override void ExposeData()
+        {
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                EventBase.fireEvent(new GameSavedEvent());
         }
     }
 }

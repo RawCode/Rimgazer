@@ -64,8 +64,8 @@ namespace RC.Rimgazer.Event
                 }
             }
 
-            Log.Warning("Found " + resolvedEvents.Count + " events");
-            Log.Warning("Found " + resolvedListeners.Count + " listeners");
+            Log.Warning("[DEBUG] Discovered " + resolvedEvents.Count    + " events");
+            Log.Warning("[DEBUG] Discovered " + resolvedListeners.Count + " listeners");
         }
 
     }
