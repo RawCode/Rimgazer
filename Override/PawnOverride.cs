@@ -1,4 +1,6 @@
-﻿using RimWorld;
+﻿using RC.Rimgazer.Event;
+using RC.Rimgazer.Event.Unit;
+using RimWorld;
 using RimWorld.SquadAI;
 using System;
 using System.Collections.Generic;
@@ -21,8 +23,10 @@ namespace RC.Rimgazer.Override
 
         protected override void ApplyDamage(DamageInfo dinfo)
         {
-            Log.Warning("NO DAMAGE PFFF");
-            if (true) return;
+            UnitDamagedEvent EVENT = new UnitDamagedEvent(this, dinfo);
+            EventBase.fireEvent(EVENT);
+            if (EVENT.suppressed)
+                return;
             this.drawer.Notify_DamageApplied(dinfo);
             this.stances.Notify_DamageTaken(dinfo);
             this.jobs.Notify_DamageTaken(dinfo);
