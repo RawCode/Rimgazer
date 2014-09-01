@@ -8,36 +8,17 @@ using Verse;
 
 namespace RC.Rimgazer
 {
-    public class Rimgazer : MapComponent
+    /*
+
+    Ring 1 class (R1)
+
+    This class used to host system wide methods and fields
+    Invoked internally from RLC classes
+
+    No external use is expected, class considered private
+    
+    */
+    public class Rimgazer
     {
-        static bool kludge = false;
-        public Rimgazer()
-        {
-            if (kludge) return;
-            kludge ^= true;
-
-            EventRuntime.resolveValidTypes();
-            EventRuntime.resolveValidEvents();
-            EventRuntime.resolveValidListeners();
-            EventBase.sortHandlerList();
-
-            if (MapInitData.startedFromEntry)
-                EventBase.fireEvent(new GameStartedEvent());
-            else
-                EventBase.fireEvent(new GameLoadedEvent());
-        }
-
-        public override void MapComponentTick()
-        {
-            if (Find.TickManager.tickCount == (DebugSettings.fastEcology ? 1 : 250))
-                EventBase.fireEvent(new GameFirstTickEvent());
-            EventBase.fireEvent(new GameTickEvent());
-        }
-
-        public override void ExposeData()
-        {
-            if (Scribe.mode == LoadSaveMode.LoadingVars)
-                EventBase.fireEvent(new GameSavedEvent());
-        }
     }
 }

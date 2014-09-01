@@ -9,7 +9,6 @@ using System.Reflection;
 
 namespace RC.Rimgazer.Event
 {
-    [PersistentComment("You can download source code from github: https://github.com/RawCode/Rimgazer.git")]
     public class EventRuntime
     {
         public static List<Type> resolvedListeners  = new List<Type>();

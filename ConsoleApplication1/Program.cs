@@ -51,27 +51,41 @@ namespace ConsoleApplication1
             this.Bz = 10;
         }
     }
+    //TODO: test
+    class TESTAZ : Program
+    {
+
+    }
     
    // [TEST("BLABLA","HAHA","TEST")]
+
+    /// <summary>NULL AND VOID</summary>
     class Program
     {
 
-        static void Register(MethodInfo METHOD)
-        {
+        public string Name { get { return "BAH"; } set { ;} }
 
-        }
+        //static void Register(MethodInfo METHOD)
+        //{
 
-        public void PUBLIC() { Console.WriteLine("TESTE METHOD INVOCATION"); }
-        public static void TTTTTT() {} 
+        //}
 
-        //[TEST("BLABLA")]
-        public void TestMethod(string EVENT)
-        {
-            Console.WriteLine("TESTE METHOD INVOCATION");
-        }
+        //public void PUBLIC() { Console.WriteLine("TESTE METHOD INVOCATION"); }
+        //public static void TTTTTT() {} 
+
+        ////[TEST("BLABLA")]
+        //public void TestMethod(string EVENT)
+        //{
+        //    Console.WriteLine("TESTE METHOD INVOCATION");
+        //}
 
         unsafe static void Main(string[] args)
         {
+            Program test = new Program();
+            test.Name = "TEST";
+            Console.WriteLine(test.Name.ToString());
+            test.Name = "SECOND TEST";
+            Console.WriteLine(test.Name.ToString());
           //  List<ZXX> test = new List<ZXX>();
           //  Random rz = new Random();
 

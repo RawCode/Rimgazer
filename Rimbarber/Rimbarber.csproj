@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{23B3FB85-9087-4738-B04A-F6BB2D7C6018}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rimbarber</RootNamespace>
+    <AssemblyName>Rimbarber</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\RimWorld\RimWorld532Win_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\RimWorld\RimWorld532Win_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RimbarberEntry.cs" />
+    <Compile Include="gaze\ApparelItem.cs" />
+    <Compile Include="gaze\ButtonText.cs" />
+    <Compile Include="gaze\ChangeBody.cs" />
+    <Compile Include="gaze\ChangeClothing.cs" />
+    <Compile Include="gaze\ChangeHead.cs" />
+    <Compile Include="gaze\Clothing.cs" />
+    <Compile Include="gaze\ColHairDef.cs" />
+    <Compile Include="gaze\Colonist.cs" />
+    <Compile Include="gaze\ColonistBypass.cs" />
+    <Compile Include="gaze\ColonistCreationMenu.cs" />
+    <Compile Include="gaze\ColonistDifficulty.cs" />
+    <Compile Include="gaze\ColonistManager.cs" />
+    <Compile Include="gaze\ColonistNum.cs" />
+    <Compile Include="gaze\Colonist_Backstory.cs" />
+    <Compile Include="gaze\Colonist_Skill.cs" />
+    <Compile Include="gaze\Common.cs" />
+    <Compile Include="gaze\DialogList.cs" />
+    <Compile Include="gaze\DialogLoad.cs" />
+    <Compile Include="gaze\DialogSave.cs" />
+    <Compile Include="gaze\Genstep_ColonistCreationMod.cs" />
+    <Compile Include="gaze\ItemDescription.cs" />
+    <Compile Include="gaze\Language.cs" />
+    <Compile Include="gaze\LoadColonists.cs" />
+    <Compile Include="gaze\LoadLanguage.cs" />
+    <Compile Include="gaze\ModdedGenText.cs" />
+    <Compile Include="gaze\ModdedMapInitParams.cs" />
+    <Compile Include="gaze\ModdedPawnInventoryGenerator.cs" />
+    <Compile Include="gaze\SaveColonists.cs" />
+    <Compile Include="gaze\SaveFiles.cs" />
+    <Compile Include="gaze\StorySkillGain.cs" />
+    <Compile Include="gaze\StoryTrait.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
