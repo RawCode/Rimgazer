@@ -79,13 +79,25 @@ namespace ConsoleApplication1
         //    Console.WriteLine("TESTE METHOD INVOCATION");
         //}
 
+        static void testxx(ref Random ff)
+        {
+            ff = null;
+        }
+
         unsafe static void Main(string[] args)
         {
-            Program test = new Program();
-            test.Name = "TEST";
-            Console.WriteLine(test.Name.ToString());
-            test.Name = "SECOND TEST";
-            Console.WriteLine(test.Name.ToString());
+
+            Random t = new Random(1488);
+            Console.WriteLine(t.Next());
+            testxx(ref t);
+            Console.WriteLine(t.Next());
+
+            //
+           // Program test = new Program();
+          //  test.Name = "TEST";
+          //  Console.WriteLine(test.Name.ToString());
+          //  test.Name = "SECOND TEST";
+          //  Console.WriteLine(test.Name.ToString());
           //  List<ZXX> test = new List<ZXX>();
           //  Random rz = new Random();
 
