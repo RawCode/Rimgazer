@@ -9,12 +9,12 @@ using System.Reflection;
 
 namespace RC.Rimgazer.Event
 {
-    public class EventRuntime
+    /*
+    public class EventBus
     {
         public static List<Type> resolvedListeners  = new List<Type>();
         public static List<Type> resolvedEvents     = new List<Type>();
-        public static readonly Type TYPE_EVENT      = typeof(EventBase);
-        public static readonly Type TYPE_LISTENER   = typeof(EventListenerAttribute);
+        public static readonly Type TYPE_EVENT      = typeof(EventRoot);
 
         /**
         This method will resolve types that can be used by system:
@@ -24,12 +24,12 @@ namespace RC.Rimgazer.Event
 
         Everything else is mostly ignored.
         */
-
+    /*
         public static void resolveValidEvents()
         {
             foreach (Type Target in resolvedEvents)
             {
-                EventBase.registerEvent(Target);
+                EventRoot.registerEvent(Target);
             }
         }
 
@@ -67,5 +67,5 @@ namespace RC.Rimgazer.Event
             Log.Warning("[DEBUG] Discovered " + resolvedListeners.Count + " listeners");
         }
 
-    }
+    }*/
 }

@@ -6,7 +6,7 @@ using System.Text;
 namespace RC.Rimgazer.Event
 {
     /*
-        This enumeration used to describe how handler should work
+        This enumeration used to describe how EventHandler s are registered by system
 
         Default params are:
 
@@ -15,10 +15,12 @@ namespace RC.Rimgazer.Event
         Binding strategy = BindToType
         AllowExceptions = false
 
+        Handlers with invalid combination of flags are ignored by default.
+        Presence of BindToMethod disable flag validation procedure.
     */
 
     [Flags]
-    enum EventHandlerFlags : int
+    enum EventHandlerFlag : int
     {
         Nothing         = 0x000,
         //Priority
@@ -42,12 +44,12 @@ namespace RC.Rimgazer.Event
                                    //types of delayed construction may not register StageEntry events
         StageEntry      = 0x000,   //by default all types resolved at StageEntry
         //Binding strategy
-        BindToField     = 0x010,   //Handler will bind to field defined by annotation
+        BindToField     = 0x010,   //Handler will bind to field, will seach static field with given name
                                    //its up to developer to construct object and place it to given field
                                    //empty field will cause NPE on event fire
         BindToSelf      = 0x020,   //Handler will recieve its own instance of hosting type
-        BindToMethod    = 0x040,   //System will pass control to method named in annotation
-                                   //no other actions are performed
+        BindToMethod    = 0x040,   //System will pass control to arbitrary method instead of registering
+                                   //will invoke static method with given name
                                    //given method invoked after all normal handlers of priority are registered
                                    //can be used to deregister unwanter handlers from other mods
         BindToType      = 0x080,   //Single instance of type constructed and shared by all handlers
@@ -61,5 +63,6 @@ namespace RC.Rimgazer.Event
 
                                    //setting this flag will allow handler to stay, ever if this will cause
                                    //entire game to crash
+                                   //warning thrown on registration of such handler
     }
 }

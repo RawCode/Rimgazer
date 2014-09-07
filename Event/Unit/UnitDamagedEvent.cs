@@ -6,12 +6,12 @@ using Verse;
 
 namespace RC.Rimgazer.Event.Unit
 {
-    public class UnitDamagedEvent : PawnEvent
-    {
-        public DamageInfo damageMeta;
-        public UnitDamagedEvent(Pawn Target, DamageInfo Damage) : base(Target)
-        {
-            this.damageMeta = Damage;
-        }
-    }
+  //  public class UnitDamagedEvent : PawnEvent
+ //   {
+  //      public DamageInfo damageMeta;
+  //      public UnitDamagedEvent(Pawn Target, DamageInfo Damage) : base(Target)
+   //     {
+  //          this.damageMeta = Damage;
+  //      }
+  //  }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RC.Rimgazer.Event.Game
 {
-    public class GameEvent : EventBase
-    {
-    }
+    //public class GameEvent : EventRoot
+    //{
+    //}
 }

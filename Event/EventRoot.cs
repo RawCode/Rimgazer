@@ -7,11 +7,21 @@ using Verse;
 
 namespace RC.Rimgazer.Event
 {
-    public class EventBase 
+    /*
+    public class EventRoot 
     {
-        static public Dictionary<Type, List<EventHandlerWrapper>> resolvedEvents =
-                  new Dictionary<Type, List<EventHandlerWrapper>>();
-        static public int topSize = 0;
+
+       // static private EventHandler
+
+
+
+
+
+
+
+      ///  static public Dictionary<Type, List<EventHandlerWrapper>> resolvedEvents =
+      //            new Dictionary<Type, List<EventHandlerWrapper>>();
+      //  static public int topSize = 0;
 
         public static void registerEvent(Type Target)
         {
@@ -20,21 +30,21 @@ namespace RC.Rimgazer.Event
                 EventException.pushException("Event " + Target + " is already registered");
                 return;
             }
-            resolvedEvents.Add(Target, new List<EventHandlerWrapper>());
+      //      resolvedEvents.Add(Target, new List<EventHandlerWrapper>());
             //Log.Warning(Target + " registered as event");
         }
 
         public static void sortHandlerList()
         {
-            int     levels                      = Enum.GetNames(typeof(EventPriorityEnum)).Length; //5
-            int[]   offsetByLevel               = new int[levels];                                 //5
-            EventHandlerWrapper[] sortingPool   = new EventHandlerWrapper[levels * topSize];       //5*3
+         //   int     levels                      = Enum.GetNames(typeof(EventPriorityEnum)).Length; //5
+         //   int[]   offsetByLevel               = new int[levels];                                 //5
+         //   EventHandlerWrapper[] sortingPool   = new EventHandlerWrapper[levels * topSize];       //5*3
 
             //Log.Warning("SortHandlerList DATA");
             //Log.Warning(levels.ToString());
             //Log.Warning(topSize.ToString());
 
-            foreach (List<EventHandlerWrapper> list in resolvedEvents.Values)
+          //  foreach (List<EventHandlerWrapper> list in resolvedEvents.Values)
             {
                 if (list.Count <= 1) continue;//no need to sort array of 1 element actually
 
@@ -109,8 +119,8 @@ namespace RC.Rimgazer.Event
                     list.Add(sortingPool[iterator]);
                     iterator++;
             }*/
-        }
-
+      //  }
+/*
         public static void registerHandler(EventHandlerWrapper Target)
         {
             //Log.Warning("Event handler probably will be registered " + Target);
@@ -133,7 +143,7 @@ namespace RC.Rimgazer.Event
 
         }
 
-        public static void fireEvent(EventBase Target)
+        public static void fireEvent(EventRoot Target)
         {
             if (!resolvedEvents.ContainsKey(Target.GetType()))
             {
@@ -163,5 +173,5 @@ namespace RC.Rimgazer.Event
 
         //suppress - cancel any futher processing
         //cancel - let other mods to process but cancel output completely
-    }
+    }*/
 }

@@ -6,18 +6,18 @@ using Verse;
 
 namespace RC.Rimgazer.Event.Unit
 {
-    public class PawnEvent : EventBase
-    {
-        public Pawn pawn;
-        public bool suppressed;
-        public PawnEvent(Pawn target)
-        {
-            this.pawn = target;
-        }
+   // public class PawnEvent : EventRoot
+   // {
+   //     public Pawn pawn;
+   //     public bool suppressed;
+    //    public PawnEvent(Pawn target)
+    //    {
+    //        this.pawn = target;
+     //   }
 
-        public void Suppress()
-        {
-            suppressed = true;
-        }
-    }
+    //    public void Suppress()
+    //    {
+    //        suppressed = true;
+     //   }
+  //  }
 }
