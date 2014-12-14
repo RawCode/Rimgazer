@@ -6,21 +6,30 @@ using System.Text;
 namespace RC.Rimgazer.Event
 {
     /*
-        This enumeration used to describe how EventHandler s are registered by system
+        This enumeration define how types\methods\fields processed by system
 
         Default params are:
 
-        Priority = Normal
-        Activation stage = StageEntry
-        Binding strategy = BindToType
-        AllowExceptions = false
+        Priority            = Normal
+        Activation stage    = StageEntry
+        Binding strategy    = BindToType
+        CatchExceptions     = true (NYI)
 
-        Handlers with invalid combination of flags are ignored by default.
-        Presence of BindToMethod disable flag validation procedure.
+        Invalid combinations are IGNORED with WARNING
+        Invalid use of INTERNAL flag will cause ERROR
+        If BINDTOMETHOD is present, any exception inside given method will cause ERROR
+
+        Flags
+            BindToField
+            BindToMethod
+        require method\field with same combination of flags
+        in case of multiple\none fields\methods flag is IGNORED with ERROR
+
+        Logic implementation located inside EventHandlerList class
     */
 
     [Flags]
-    enum EventHandlerFlag : int
+    public enum EventHandlerFlags : short
     {
         Nothing         = 0x000,
         //Priority
@@ -44,25 +53,15 @@ namespace RC.Rimgazer.Event
                                    //types of delayed construction may not register StageEntry events
         StageEntry      = 0x000,   //by default all types resolved at StageEntry
         //Binding strategy
-        BindToField     = 0x010,   //Handler will bind to field, will seach static field with given name
-                                   //its up to developer to construct object and place it to given field
-                                   //empty field will cause NPE on event fire
+        BindToField     = 0x010,   //Handler will bind to field, will search for field with same flags
         BindToSelf      = 0x020,   //Handler will recieve its own instance of hosting type
-        BindToMethod    = 0x040,   //System will pass control to arbitrary method instead of registering
-                                   //will invoke static method with given name
-                                   //given method invoked after all normal handlers of priority are registered
-                                   //can be used to deregister unwanter handlers from other mods
+        
+        BindToMethod    = 0x040,   //Control passed to arbitrary method
+                                   //no actions done by system, accumulated errors are abandoned
+                                   //will seach for method with same flags
+
         BindToType      = 0x080,   //Single instance of type constructed and shared by all handlers
 
-        AllowExceptions = 0x100,   //by default system will automatically disable faulty handlers
-                                   //actions "punished" with removal are:
-
-                                   //execution longer then 1000ms inside main thread
-                                   //runtime exceptions
-                                   //event fire recursion
-
-                                   //setting this flag will allow handler to stay, ever if this will cause
-                                   //entire game to crash
-                                   //warning thrown on registration of such handler
+        CatchExceptions = 0x100,   //By default system will catch errors, this can be disabled
     }
 }

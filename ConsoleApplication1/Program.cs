@@ -2,223 +2,88 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace ConsoleApplication1
 {
-    class TEST : Attribute
-    {
-        public TEST(string s,string x,string y){}
-    }
 
-    enum TZ
+    public static class MethodUtil
     {
-        ONE,
-        TWO,
-        FOR,
-        THIS
-    }
 
-    class ZXX
-    {
-        public TZ priority;
-        public ZXX(TZ check)
+        public static void ReplaceMethod(MethodBase source, MethodBase dest)
         {
-            this.priority = check;
+            IntPtr destAdr = GetMethodAddress(dest);
+            IntPtr srcAdr = GetMethodAddress(source);
+            unsafe
+            {
+                uint* d = (uint*)destAdr.ToPointer();
+                *d = *((uint*)srcAdr.ToPointer());
+            }
         }
 
-        public override string ToString()
+        public static IntPtr GetMethodAddress(MethodBase method)
         {
-            return priority.ToString();
-        }
-    }
+            // Prepare the method so it gets jited
+            RuntimeHelpers.PrepareMethod(method.MethodHandle);
 
+            // If 3.5 sp1 or greater than we have a different layout in memory.
+            unsafe
+            {
+                return new IntPtr(((int*)method.MethodHandle.Value.ToPointer() + 2));
+            }
 
-    public class A
-    {
-        public int Az;
-        public A()
-        {
-            this.Az = 10;
         }
     }
 
-    public class B
+    public static class DefDatabase
     {
-        public int Bz;
-        public B()
+        public static void AX()
         {
-            this.Bz = 10;
-        }
-    }
-    //TODO: test
-    class TESTAZ : Program
-    {
-
-    }
-    
-   // [TEST("BLABLA","HAHA","TEST")]
-
-    /// <summary>NULL AND VOID</summary>
-    class Program
-    {
-
-        public string Name { get { return "BAH"; } set { ;} }
-
-        //static void Register(MethodInfo METHOD)
-        //{
-
-        //}
-
-        //public void PUBLIC() { Console.WriteLine("TESTE METHOD INVOCATION"); }
-        //public static void TTTTTT() {} 
-
-        ////[TEST("BLABLA")]
-        //public void TestMethod(string EVENT)
-        //{
-        //    Console.WriteLine("TESTE METHOD INVOCATION");
-        //}
-
-        static void testxx(ref Random ff)
-        {
-            ff = null;
+            Console.WriteLine("AX");
         }
 
-        unsafe static void Main(string[] args)
+        public static void BX()
         {
+            Console.WriteLine("BX");
+        }
 
-            Random t = new Random(1488);
-            Console.WriteLine(t.Next());
-            testxx(ref t);
-            Console.WriteLine(t.Next());
+    }
 
-            //
-           // Program test = new Program();
-          //  test.Name = "TEST";
-          //  Console.WriteLine(test.Name.ToString());
-          //  test.Name = "SECOND TEST";
-          //  Console.WriteLine(test.Name.ToString());
-          //  List<ZXX> test = new List<ZXX>();
-          //  Random rz = new Random();
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            MethodInfo A = typeof(DefDatabase).GetMethod("AX", BindingFlags.Static | BindingFlags.Public);
+            MethodInfo B = typeof(DefDatabase).GetMethod("BX", BindingFlags.Static | BindingFlags.Public);
 
-          //  for (int i = 0; i < 20; i++)
-          //  {
-          //      test.Add(new ZXX((TZ)rz.Next(4)));
-          //  }
+            MethodUtil.ReplaceMethod(A, B);
 
-          //  test.Add(new ZXX(TZ.FOR));
-          //  test.Add(new ZXX(TZ.TWO));
-          //  test.Add(new ZXX(TZ.THIS));
-          //  test.Add(new ZXX(TZ.ONE));
-
-          //  foreach (ZXX cc in test)
-          //      Console.WriteLine(cc);
-
-          //  int dimension = Enum.GetNames(typeof(TZ)).Length;
-          //  int size = test.Count;
-          //  int[] offsets = new int[dimension];
-
-          //  ZXX[] sorted = new ZXX[dimension*size];
-
-          //  foreach (ZXX cc in test)
-          //  {
-          //      int targetindex = ((int)(cc.priority) * size) + offsets[(int)cc.priority];
-          //      offsets[(int)cc.priority]++;
-          //      sorted[targetindex] = cc;
-          //  }
-          //  //int a = 0;
-          //  /*
-          //  foreach(ZXX cv in sorted)
-          //  {
-          //      if (cv == null)
-          //          continue;
-          //      test[a] = cv;
-          //      a++;
-          //  }
-          //  */
-          ////  foreach (int f in offsets)
-          // // {
-          //      //Console.WriteLine(f);
-          ////  }
-
-          // // int xx = 0;
-          //  //foreach (ZXX x in sorted)
-          //  //{
-          //      //Console.WriteLine(x +"%%" + xx);
-          //  //    xx++;
-          //  // }
-
-          //  //Console.ReadKey();
-          //  //if (true) return;
+            DefDatabase.AX();
+            DefDatabase.BX();
 
 
-          //  int index = 0;
-          //  int step = 0;
-          //  test.Clear();
+            //DefDatabase<Program>.Add(new Program());
+            //Console.WriteLine("BREAK");
+            //DefDatabase<ProgramZETA>.Add(new ProgramZETA());
+            //DefDatabase<ProgramBETA>.Add(new ProgramBETA());
 
-          //  while(true)
-          //  {
-          //      if (index == offsets[step] + step * size)
-          //      {
-          //          if (step == dimension-1)
-          //              break;
-          //          step++;
-          //          index = step * size;
-          //          continue;
-          //      }
-          //      test.Add(sorted[index]);
-          //      index++;
-          //  }
+            //Console.WriteLine(typeof(DefDatabase<>).GetHashCode().ToString());
+            //Console.WriteLine(typeof(DefDatabase<Program>).GetHashCode().ToString());
+           // Console.WriteLine(typeof(DefDatabase<ProgramZETA>).GetHashCode().ToString());
 
+            //Console.WriteLine(typeof(DefDatabase<>).ToString());
+            //Console.WriteLine(typeof(DefDatabase<Program>).ToString());
+            //Console.WriteLine(typeof(DefDatabase<ProgramZETA>).ToString());
 
-          //  //sxxx.
-          //  foreach (ZXX cc in test)
-          //      Console.WriteLine(cc);
-          //  Console.WriteLine(test.Count);
+            //foreach (Type t in typeof(DefDatabase<>).Assembly.GetTypes())
+            //{
+            //    Console.WriteLine(t.ToString());
+            //}
 
-          //  //experemental sorting
+            //Console.WriteLine(typeof(DefDatabase<ProgramZETA>).BaseType.ToString());
 
-
-            //Console.WriteLine("TEST");
-
-            //MethodInfo entry = typeof(Program).GetMethod("TestMethod", new Type[]{typeof(string)});
-            //MethodInfo[] entry = typeof(Program).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-
-            //foreach (MethodInfo mm in entry)
-                //Console.WriteLine(mm.ToString());
-
-            //entry[0].Invoke(new Program(), null);
-
-            //Console.WriteLine((entry != null).ToString());
-
-            //Console.WriteLine((BindingFlags)17);
-
-            //Type s = typeof(Program);
-
-
-            //Object[] data = s.GetCustomAttributes(typeof(TEST),false);
-
-            //MethodInfo ss = typeof(Program).Module;
-
-            //Type ss = typeof(Program);
-                
-                
-                //get   ("TestMethod",BindingFlags.Public | BindingFlags.Instance);
-
-            //CustomAttributeData dd = CustomAttributeData.GetCustomAttributes(ss)[0];
-           // dd.
-
-            //Console.WriteLine(dd[0].ToString());
-            //Console.WriteLine(dd[0].GetType().ToString());
-
-            //foreach (CustomAttributeTypedArgument x in dd.ConstructorArguments)
-               // Console.WriteLine(x.Value);
-            
-            //CustomAttributeData data = ll.First < CustomAttributeData >();
-            //Console.WriteLine(ll.GetType().ToString());
-
-            //Console.WriteLine(data.ConstructorArguments.First().Value);
-            //Console.WriteLine(data.ToString());
             Console.ReadKey();
 
         }

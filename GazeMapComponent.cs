@@ -21,7 +21,7 @@ namespace RC.Rimgazer
     */
     class GazeMapComponent : MapComponent
     {
-        static string GitHub = "https://github.com/RawCode/Rimgazer.git";
+        static public string GitHub = "https://github.com/RawCode/Rimgazer.git";
 
         //this field used to counter double construction on loading savegame
         static bool kludge = false;

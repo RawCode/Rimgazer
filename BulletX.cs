@@ -30,26 +30,26 @@ namespace RC.Rimgazer
             Color.magenta,
             Color.grey
         };
-        public override void Draw()
-        {
-            zz++;
-            if (zz % 100 == 0)
-                Log.Warning(this.ExactRotation.ToString());
+        //public override void Draw()
+        //{
+        //    zz++;
+        //    if (zz % 100 == 0)
+        //        Log.Warning(this.ExactRotation.ToString());
 
-            //Log.Warning("Draw method");
-            // base.def.drawMat;
-            Material rs = base.def.drawMat;
-            rs.color = test;
-            Graphics.DrawMesh(MeshPool.plane10, this.DrawPos, this.ExactRotation, base.def.drawMat, 0);
-            base.Comps_Draw();
-        }
+        //    //Log.Warning("Draw method");
+        //    // base.def.drawMat;
+        //    Material rs = base.def.drawMat;
+        //    rs.color = test;
+        //    Graphics.DrawMesh(MeshPool.plane10, this.DrawPos, this.ExactRotation, base.def.drawMat, 0);
+        //    base.Comps_Draw();
+        //}
 
-        public override Material DrawMat(IntRot rot)
-        {
-            Log.Warning("DrawMat method");
-            Material tmp = base.DrawMat(rot);
-            tmp.color = Color.red;
-            return tmp;
-        }
+        //public override Material DrawMat(IntRot rot)
+        //{
+        //    Log.Warning("DrawMat method");
+        //    Material tmp = base.DrawMat(rot);
+        //    tmp.color = Color.red;
+        //    return tmp;
+        //}
     }
 }
