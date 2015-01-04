@@ -9,6 +9,6 @@ namespace RC.Rimgazer.Event
     {
         //ONLY real purporse of this class, to mark types, fields or methods
         //data stored directly inside assembly files
-        public EventHandlerMark(EventHandlerFlags a) { }
+        public EventHandlerMark(CommonFlags a) { }
     }
 }

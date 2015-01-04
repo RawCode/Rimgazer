@@ -55,25 +55,27 @@ namespace RC.Rimgazer
         static FieldInfo currentFile       = typeof(XmlLoader).GetField("loadingAsset", (BindingFlags)40);
         static int redefineID              = 0;
         static LoadableXmlAsset latestFile = null;
-        static Redefine[]       stageBPool = new Redefine[16];
-        static int              stageBMark = 0;
+        static List<Redefine> stageBPool   = new List<Redefine>();
 
-        //Instance fields section
-
-        //Multiple fields can be used at onces:
-
+        //Instance fields section.
+        //Multiple fields can be used at once:
         //Selecting Field, Value and Mod allows to replace content of matching fields if they have matching value
-        //and def belongs to matching mods
-        
-        //Will allow expressions and arbitrary code later.
+        //and def is defined by matching mod.
 
-        public bool      disabled = false;
-        public string targetDef   = ""; //Defs with matching names
-        public string targetMod   = ""; //Defs from specific mod
-        public string targetType  = ""; //Defs of specific type
-        public string targetField = ""; //Specific field
-        public string targetValue = ""; //Specific value
-        public string replaceWith = ""; //String automatically resolved to valid type
+        public bool   isDisabled  = false;
+
+        public string targetDef   = ""; //Defs with matching names.
+        public string targetMod   = ""; //Defs from specific mod.
+        public string targetType  = ""; //Defs of specific type.
+
+        public string targetField = ""; //Specific field.
+        public string targetValue = ""; //Specific value.
+
+        public string replaceWith = ""; //String automatically resolved to valid type.
+
+        public int    payloadFlag = 0 ; //for non default field modify action.
+        public string payloadData = ""; //allow to copy, replace of remove defs from database.
+
 
         public sealed override void ResolveReferences()
         {
@@ -104,8 +106,6 @@ namespace RC.Rimgazer
             this.defName = latestFile.name.Replace(".xml", "") + "_" + redefineID;
         }
 
-
-
         public virtual void StageA()
         {
             //StageA performed after all ThingDefs are finalized.
@@ -113,14 +113,14 @@ namespace RC.Rimgazer
             {
                 //Firstrun routine, required for proper StageB initialization.
                 lastToProcess = DefDatabase<Redefine>.AllDefsListForReading.Last();
-                Log.Warning("First run route is passed");
+                Log.Warning("Static Stage 0");
             }
             
             //Both disabled and active redefines at this stage generate transactions.
             //After all transactions are generated, redefines registered for StageB
             //given chance to review and modify transactions.
             //After all changes are done, transactions merged following priority rules and then merged with database
-            Log.Warning(this.ToString() + " processed on StageA");
+            Log.Warning(this.ToString() + " Stage 1");
 
 
 
@@ -128,10 +128,10 @@ namespace RC.Rimgazer
             {
                 //StageA is finished
                 //Starting StageB
-                Log.Warning(this.ToString() + " processed on StageB");
+                Log.Warning("Static Stage 2");
 
-                ThingDef humanovveride = ThingDef.Named("Human");
-                humanovveride.thingClass = typeof(GazePawn);
+                //ThingDef humanovveride = ThingDef.Named("Human");
+                //humanovveride.thingClass = typeof(GazePawn);
             }
 
         }
