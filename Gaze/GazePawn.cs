@@ -31,7 +31,7 @@ namespace RC.Rimgazer.Gaze
             }
             if (base.apparel != null)
             {
-                base.apparel.WornApparelListForReading.Clear();
+                //base.apparel.WornApparelListForReading.Clear();
             }
             if (base.inventory != null)
             {

@@ -14,7 +14,7 @@ namespace RC.Rimgazer
         static int state = -1;
         Region bound = null;
 
-        private static Graphic FireGraphic = GraphicDatabase.Get_Flicker("Things/Special/Fire", ShaderDatabase.MotePostLight, false, Color.blue);
+        //private static Graphic FireGraphic = GraphicDatabase.Get_Flicker("Things/Special/Fire", ShaderDatabase.MotePostLight, false, Color.blue);
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
@@ -73,7 +73,7 @@ namespace RC.Rimgazer
         public override void DrawAt(Vector3 drawLoc)
         {
             base.DrawAt(drawLoc);
-            FireGraphic.Draw(drawLoc, IntRot.north, this);
+            //FireGraphic.Draw(drawLoc, IntRot.north, this);
         }
 
     }

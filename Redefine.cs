@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using UnityEngine;
 using Verse;
 
 namespace RC.Rimgazer
@@ -77,10 +76,32 @@ namespace RC.Rimgazer
         public string payloadData = ""; //allow to copy, replace of remove defs from database.
 
 
-        public sealed override void ResolveReferences()
+        public static int TEST()
         {
-            //Override StageA instead.
-            StageA();
+            return 42;
+        }
+
+        unsafe public sealed override void ResolveReferences()
+        {
+            Log.Warning("x86 override test 1");
+            Log.Warning(TEST().ToString());
+
+            byte* mpx_1 = (byte*)typeof(Redefine).GetMethod ("TEST", BindingFlags.Static | BindingFlags.Public).MethodHandle.GetFunctionPointer ().ToPointer();
+            
+            *(mpx_1 + 0) = 0xB8; //mov eax,0x0
+            *(mpx_1 + 1) = 7;
+            *(mpx_1 + 2) = 2;
+            *(mpx_1 + 3) = 2;
+            *(mpx_1 + 4) = 1;
+            *(mpx_1 + 5) = 0xC3; //ret
+
+            Log.Warning("x86 override test 2");
+            Log.Warning(TEST().ToString());
+
+
+            Log.Warning("have a nice day!");
+
+            //StageA();
         }
 
         public Mod ownerOfDef()

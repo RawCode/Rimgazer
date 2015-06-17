@@ -21,7 +21,7 @@ namespace RC.Rimgazer
 
             Corpse shell = (Corpse)newItem;
             Pawn target = shell.innerPawn;
-            target.healthTracker.Health = 10;
+            //target.healthTracker.summaryHealth = 10;
             target.Position = shell.Position;
             shell.Destroy();
             this.Destroy();

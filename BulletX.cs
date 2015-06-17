@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
-using VerseBase;
 
 namespace RC.Rimgazer
 {
